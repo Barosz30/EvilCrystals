@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-void: #242019;
+  --color-forest: #22c55e;
+  --color-earth: #854d0e;
+  --color-gold: #f59e0b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply text-gray-200 font-body antialiased min-h-screen;
+  background: linear-gradient(
+    165deg,
+    #2a2520 0%,
+    #1e2a1a 35%,
+    #252a20 60%,
+    #2d261f 100%
+  );
+  background-attachment: fixed;
+}
+
+/* Delikatna animacja tła – bardzo subtelna zmiana jasności */
+@keyframes bg-breath {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.03); }
+}
+body {
+  animation: bg-breath 8s ease-in-out infinite;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+}
+
+/* Warstwa „kurzu” / cząstek – subtelne kropki w tle */
+.ambient-dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.ambient-dust span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.2);
+  animation: float 6s ease-in-out infinite;
+}
+.ambient-dust span:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 7s; }
+.ambient-dust span:nth-child(2) { left: 80%; top: 60%; animation-delay: -2s; animation-duration: 8s; }
+.ambient-dust span:nth-child(3) { left: 50%; top: 80%; animation-delay: -4s; animation-duration: 6s; }
+.ambient-dust span:nth-child(4) { left: 25%; top: 50%; animation-delay: -1s; animation-duration: 9s; }
+.ambient-dust span:nth-child(5) { left: 70%; top: 15%; animation-delay: -3s; animation-duration: 7s; }
+.ambient-dust span:nth-child(6) { left: 15%; top: 75%; animation-delay: -5s; width: 3px; height: 3px; background: rgba(245, 158, 11, 0.25); }
+.ambient-dust span:nth-child(7) { left: 90%; top: 40%; animation-delay: -2.5s; width: 3px; height: 3px; background: rgba(245, 158, 11, 0.2); }
+
+/* Karty – lekki lift i glow przy hover */
+.card-fantasy {
+  @apply rounded-xl border transition-all duration-300;
+  box-shadow: 0 4px 20px -4px rgba(34, 197, 94, 0.08), 0 0 0 1px rgba(74, 64, 53, 0.35);
+}
+.card-fantasy:hover {
+  box-shadow: 0 8px 28px -4px rgba(34, 197, 94, 0.12), 0 0 0 1px rgba(74, 64, 53, 0.45);
+}
+
+/* Przyciski CTA – delikatny blask */
+.btn-glow:hover {
+  box-shadow: 0 0 24px -4px rgba(34, 197, 94, 0.35);
+}
+
+/* Scena – trawa: wyraźna warstwa zieleni i pasy „trawy” */
+.grass-layer {
+  background: linear-gradient(
+    180deg,
+    rgba(26, 36, 22, 0.3) 0%,
+    rgba(22, 101, 52, 0.2) 25%,
+    rgba(21, 67, 45, 0.45) 55%,
+    rgba(15, 61, 35, 0.7) 85%,
+    rgba(13, 52, 28, 0.85) 100%
+  );
+}
+.grass-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 6px,
+    rgba(34, 197, 94, 0.06) 6px,
+    rgba(34, 197, 94, 0.06) 9px
+  );
+  pointer-events: none;
+}
+/* Delikatne „źdźbła” trawy – pionowe paski */
+.grass-layer::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70%;
+  background-image: repeating-linear-gradient(
+    105deg,
+    transparent 0px,
+    transparent 3px,
+    rgba(34, 197, 94, 0.08) 3px,
+    rgba(34, 197, 94, 0.08) 4px
+  ), repeating-linear-gradient(
+    75deg,
+    transparent 0px,
+    transparent 4px,
+    rgba(22, 101, 52, 0.06) 4px,
+    rgba(22, 101, 52, 0.06) 5px
+  );
+  pointer-events: none;
+}
+
+/* Vignette na scenie – ramka i cień */
+.scene-vignette {
+  box-shadow: inset 0 0 60px -10px rgba(0, 0, 0, 0.5);
+}
+.scene-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(133, 77, 14, 0.25);
+  border-radius: 0;
+}
+
+/* Pasek zasobów na dole sceny */
+.scene-resource-bar {
+  backdrop-filter: blur(4px);
+}
+
+/* Tytuł gry – delikatny blask */
+.title-glow {
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.35), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+/* Mag – delikatna animacja „oddechu” */
+.mage-sprite {
+  animation: mage-idle 4s ease-in-out infinite;
+}
+@keyframes mage-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+/* Lekka animacja „unoszenia się” dla pojedynczych potworów (np. impa pod przywoływaczem) */
+.imp-floating {
+  animation: imp-float 3.2s ease-in-out infinite;
+}
+@keyframes imp-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+/* Potwory na scenie – bez żadnego przesuwania (żadna animacja transform) */
+.scene-creature {
+  animation: none;
+  transform: none;
+}
+.scene-creature-wrapper {
+  animation: none;
+  transform: none;
+}
+
+.scene-upgrade {
+  animation: upgrade-appear 0.6s ease-out backwards;
+}
+@keyframes upgrade-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Touch-friendly tap targets on mobile */
+@media (pointer: coarse) {
+  button, [role="button"] {
+    min-height: 44px;
+  }
+}
+
+/* Dodatkowe utilsy inspirowane wersją z Lovable */
+.font-gothic {
+  font-family: 'Cinzel', serif;
+}
+
+.font-body {
+  font-family: 'Crimson Text', serif;
+}
+
+.bg-dark-gradient {
+  background: linear-gradient(180deg, #050814 0%, #050818 50%, #12001a 100%);
+}
+
+.text-parchment {
+  color: #f3e4c0;
+}
+
+.text-muted-foreground {
+  color: #9ca3af;
+}
+
+.text-shadow-glow-green {
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.7), 0 0 30px rgba(34, 197, 94, 0.4);
+}
+
+.text-shadow-glow-purple {
+  text-shadow: 0 0 10px rgba(129, 140, 248, 0.7), 0 0 30px rgba(129, 140, 248, 0.4);
+}
+
+.shadow-glow-green {
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.18);
+}
+
+.shadow-glow-purple {
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.4), 0 0 40px rgba(168, 85, 247, 0.18);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+}
+
+.achievement-toast {
+  animation: toast-in 180ms ease-out both;
+}
+
