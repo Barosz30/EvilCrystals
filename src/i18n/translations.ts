@@ -71,7 +71,11 @@ const pl: NestedRecord = {
     loadGame: 'Wczytaj grę',
     googleLogin: 'Logowanie przez Google',
     googleLoginSoon: 'Logowanie przez Google (wkrótce)',
-    close: 'Zamknij'
+    close: 'Zamknij',
+    expand: 'Rozwiń',
+    collapse: 'Zwiń',
+    armyViewScene: 'Pokaż listę armii',
+    armyViewList: 'Pokaż scenę z magiem'
   },
   creature: { imp: 'Imp', skeleton: 'Szkielet', wraith: 'Upiór', golem: 'Golem', dragon: 'Smok', lich: 'Lisz' },
   upgrade: {
@@ -173,7 +177,11 @@ const en: NestedRecord = {
     loadGame: 'Load game',
     googleLogin: 'Sign in with Google',
     googleLoginSoon: 'Sign in with Google (coming soon)',
-    close: 'Close'
+    close: 'Close',
+    expand: 'Expand',
+    collapse: 'Collapse',
+    armyViewScene: 'Show army list',
+    armyViewList: 'Show mage scene'
   },
   creature: { imp: 'Imp', skeleton: 'Skeleton', wraith: 'Wraith', golem: 'Golem', dragon: 'Dragon', lich: 'Lich' },
   upgrade: {
@@ -275,7 +283,11 @@ const es: NestedRecord = {
     loadGame: 'Cargar partida',
     googleLogin: 'Iniciar sesión con Google',
     googleLoginSoon: 'Iniciar sesión con Google (próximamente)',
-    close: 'Cerrar'
+    close: 'Cerrar',
+    expand: 'Expandir',
+    collapse: 'Contraer',
+    armyViewScene: 'Ver lista del ejército',
+    armyViewList: 'Ver escena del mago'
   },
   creature: { imp: 'Diablillo', skeleton: 'Esqueleto', wraith: 'Espectro', golem: 'Gólem', dragon: 'Dragón', lich: 'Nigromante' },
   upgrade: {
@@ -377,7 +389,11 @@ const de: NestedRecord = {
     loadGame: 'Spiel laden',
     googleLogin: 'Mit Google anmelden',
     googleLoginSoon: 'Mit Google anmelden (bald verfügbar)',
-    close: 'Schließen'
+    close: 'Schließen',
+    expand: 'Erweitern',
+    collapse: 'Einklappen',
+    armyViewScene: 'Armeeliste anzeigen',
+    armyViewList: 'Magierszene anzeigen'
   },
   creature: { imp: 'Imp', skeleton: 'Skelett', wraith: 'Gespenst', golem: 'Golem', dragon: 'Drache', lich: 'Lich' },
   upgrade: {
@@ -479,7 +495,11 @@ const fr: NestedRecord = {
     loadGame: 'Charger la partie',
     googleLogin: 'Connexion avec Google',
     googleLoginSoon: 'Connexion Google (bientôt disponible)',
-    close: 'Fermer'
+    close: 'Fermer',
+    expand: 'Développer',
+    collapse: 'Réduire',
+    armyViewScene: 'Afficher la liste de l\'armée',
+    armyViewList: 'Afficher la scène du mage'
   },
   creature: { imp: 'Imp', skeleton: 'Squelette', wraith: 'Spectre', golem: 'Golem', dragon: 'Dragon', lich: 'Liche' },
   upgrade: {
@@ -581,7 +601,11 @@ const it: NestedRecord = {
     loadGame: 'Carica partita',
     googleLogin: 'Accedi con Google',
     googleLoginSoon: 'Accesso con Google (presto disponibile)',
-    close: 'Chiudi'
+    close: 'Chiudi',
+    expand: 'Espandi',
+    collapse: 'Comprimi',
+    armyViewScene: 'Mostra lista esercito',
+    armyViewList: 'Mostra scena del mago'
   },
   creature: { imp: 'Folletto', skeleton: 'Scheletro', wraith: 'Spettro', golem: 'Golem', dragon: 'Drago', lich: 'Lich' },
   upgrade: {
@@ -683,7 +707,11 @@ const pt: NestedRecord = {
     loadGame: 'Carregar jogo',
     googleLogin: 'Entrar com Google',
     googleLoginSoon: 'Entrar com Google (em breve)',
-    close: 'Fechar'
+    close: 'Fechar',
+    expand: 'Expandir',
+    collapse: 'Recolher',
+    armyViewScene: 'Mostrar lista do exército',
+    armyViewList: 'Mostrar cena do mago'
   },
   creature: { imp: 'Diabrete', skeleton: 'Esqueleto', wraith: 'Espectro', golem: 'Golem', dragon: 'Dragão', lich: 'Lich' },
   upgrade: {
@@ -785,7 +813,11 @@ const ru: NestedRecord = {
     loadGame: 'Загрузить игру',
     googleLogin: 'Войти через Google',
     googleLoginSoon: 'Вход через Google (скоро)',
-    close: 'Закрыть'
+    close: 'Закрыть',
+    expand: 'Развернуть',
+    collapse: 'Свернуть',
+    armyViewScene: 'Показать список армии',
+    armyViewList: 'Показать сцену с магом'
   },
   creature: { imp: 'Бес', skeleton: 'Скелет', wraith: 'Призрак', golem: 'Голем', dragon: 'Дракон', lich: 'Лич' },
   upgrade: {
@@ -887,7 +919,11 @@ const zh: NestedRecord = {
     loadGame: '加载游戏',
     googleLogin: '使用 Google 登录',
     googleLoginSoon: '使用 Google 登录（即将推出）',
-    close: '关闭'
+    close: '关闭',
+    expand: '展开',
+    collapse: '折叠',
+    armyViewScene: '显示军队列表',
+    armyViewList: '显示法师场景'
   },
   creature: { imp: '小恶魔', skeleton: '骷髅', wraith: '怨灵', golem: '魔像', dragon: '龙', lich: '巫妖' },
   upgrade: {
@@ -989,7 +1025,11 @@ const ja: NestedRecord = {
     loadGame: 'ゲームを読み込み',
     googleLogin: 'Google でログイン',
     googleLoginSoon: 'Google ログイン（近日対応）',
-    close: '閉じる'
+    close: '閉じる',
+    expand: '展開',
+    collapse: '折りたたむ',
+    armyViewScene: '軍隊リストを表示',
+    armyViewList: '魔術師のシーンを表示'
   },
   creature: { imp: 'インプ', skeleton: 'スケルトン', wraith: 'レイス', golem: 'ゴーレム', dragon: 'ドラゴン', lich: 'リッチ' },
   upgrade: {
