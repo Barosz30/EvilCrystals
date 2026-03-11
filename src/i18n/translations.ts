@@ -1067,7 +1067,7 @@ export function getStoredLang(): LangCode {
     const v = localStorage.getItem(LANG_STORAGE_KEY)
     if (v && (all as Record<string, unknown>)[v]) return v as LangCode
   } catch {}
-  return 'pl'
+  return 'en'
 }
 
 export function setStoredLang(lang: LangCode): void {

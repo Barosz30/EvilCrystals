@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useMageGameState, getCost } from './mage/useMageGameState'
 import { useLanguage } from './i18n/LanguageContext'
 import type { LangCode } from './i18n/translations'
@@ -26,7 +27,9 @@ export default function MageApp() {
   const { t, lang, setLang, langNames } = useLanguage()
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [playerName, setPlayerName] = useState('Mroczny Władca')
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false)
   const langMenuRef = useRef<HTMLDivElement>(null)
+  const langDropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     try {
@@ -41,12 +44,35 @@ export default function MageApp() {
     } catch {}
   }, [playerName])
 
+  useEffect(() => {
+    if (settingsOpen) {
+      document.body.style.overflow = 'hidden'
+      return () => {
+        document.body.style.overflow = ''
+      }
+    }
+  }, [settingsOpen])
+
+  useEffect(() => {
+    if (!langDropdownOpen) return
+    const onOutside = (e: MouseEvent) => {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) {
+        setLangDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onOutside)
+    return () => document.removeEventListener('mousedown', onOutside)
+  }, [langDropdownOpen])
+
   const unlockedCount = game.achievements.filter((a) => a.unlocked).length
 
-  const langCodes: LangCode[] = ['pl', 'en', 'es', 'de', 'fr', 'it', 'pt', 'ru', 'zh', 'ja']
+  const langCodes: LangCode[] = ['en', 'pl', 'es', 'de', 'fr', 'it', 'pt', 'ru', 'zh', 'ja']
 
   return (
-    <div className="min-h-screen bg-dark-gradient text-foreground font-body relative">
+    <div
+      className={`min-h-screen bg-dark-gradient text-foreground font-body relative ${settingsOpen ? 'hidden' : ''}`}
+      aria-hidden={settingsOpen}
+    >
       {/* Settings button - top right */}
       <div className="fixed top-4 right-4 z-50" ref={langMenuRef}>
         <button
@@ -536,9 +562,10 @@ export default function MageApp() {
         </section>
       </main>
 
-      {settingsOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-950/95 p-5 shadow-2xl">
+      {settingsOpen &&
+        createPortal(
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+            <div className="w-full max-w-md max-h-[calc(100vh-2rem)] overflow-y-auto rounded-2xl border border-slate-700 bg-slate-950/95 p-5 shadow-2xl">
             <div className="flex items-start justify-between gap-3 mb-4">
               <div>
                 <h2 className="font-gothic text-sm tracking-[0.3em] text-parchment uppercase">
@@ -610,31 +637,51 @@ export default function MageApp() {
                 </button>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2" ref={langDropdownRef}>
                 <div className="text-xs font-semibold text-parchment">
                   {t('ui.language')}
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  {langCodes.slice(0, 6).map((code) => (
-                    <button
-                      key={code}
-                      type="button"
-                      onClick={() => setLang(code)}
-                      className={`rounded-md px-2 py-1.5 text-[11px] border transition ${
-                        code === lang
-                          ? 'border-emerald-500/80 bg-emerald-500/15 text-emerald-200'
-                          : 'border-slate-700 bg-slate-900/80 text-parchment hover:border-emerald-500/60'
-                      }`}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setLangDropdownOpen((o) => !o)}
+                    className="flex w-full items-center justify-between rounded-md border border-slate-600 bg-slate-900 px-3 py-1.5 text-left text-sm text-parchment outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/60"
+                    aria-label={t('ui.language')}
+                    aria-expanded={langDropdownOpen}
+                    aria-haspopup="listbox"
+                  >
+                    <span>{langNames[lang]}</span>
+                    <span className="text-muted-foreground text-xs" aria-hidden>{langDropdownOpen ? '▴' : '▾'}</span>
+                  </button>
+                  {langDropdownOpen && (
+                    <ul
+                      role="listbox"
+                      className="absolute left-0 right-0 bottom-full z-10 mb-1 flex max-h-48 flex-col-reverse overflow-y-auto rounded-md border border-slate-600 bg-slate-900 py-1 shadow-lg"
+                      aria-label={t('ui.language')}
                     >
-                      {langNames[code]}
-                    </button>
-                  ))}
+                      {langCodes.map((code) => (
+                        <li
+                          key={code}
+                          role="option"
+                          aria-selected={code === lang}
+                          onClick={() => {
+                            setLang(code)
+                            setLangDropdownOpen(false)
+                          }}
+                          className={`cursor-pointer px-3 py-2 text-sm ${code === lang ? 'bg-emerald-500/20 text-emerald-200' : 'text-parchment hover:bg-slate-800 hover:text-parchment'}`}
+                        >
+                          {langNames[code]}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
+        </div>,
+          document.body
+        )}
     </div>
   )
 }
