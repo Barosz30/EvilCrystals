@@ -253,3 +253,5 @@ export default function MageApp() {
     </div>
   )
 }
+
+// todo fixes
