@@ -255,3 +255,4 @@ export default function MageApp() {
 }
 
 // todo fixes
+// split windows
